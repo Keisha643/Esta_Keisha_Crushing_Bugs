@@ -5,8 +5,8 @@ console.log("JavaScript File is linked");
 const labels = document.querySelectorAll(".label");
 const targetZones = document.querySelectorAll(".target-zone");
 let currentDraggedElement = null;
-// add variable for reset button;
-// add variable for label box
+const resetBtn = document.getElementById("reset-btn");
+const labelBox = document.getElementById("label-box");
 
 
 // Functions
@@ -40,12 +40,15 @@ function dropped(e) {
     currentDraggedElement = null;
 }
 
-// function reset() {
-    // collect all the labels and put them back
-    // check all target zones/loop through them, see IF the dropzone has a label in it
-    // if it does, add that label back to the pieces
-    // labelBox.appendChild(); put pack piece
-// }
+function resetPuzzle() {
+    // Move all labels back to the label box
+    labels.forEach(label => {
+        labelBox.appendChild(label);
+    });
+
+    // Clear the dragged element reference
+    currentDraggedElement = null;
+}
 
 
 // Event Listeners
@@ -58,6 +61,4 @@ targetZones.forEach(zone => {
     zone.addEventListener("drop", dropped);
 });
 
-
-// add Event Listener for the reset button
-// listen for the click event, call a reset function
+resetBtn.addEventListener("click", resetPuzzle);
