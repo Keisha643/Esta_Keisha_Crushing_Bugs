@@ -29,6 +29,8 @@ function dropped(e) {
     // if this dropzone has a child, don't let it drop
     // use a return statement
 
+    this.classList.remove("highlight");
+
     if(this.firstElementChild) {
         return; 
     }
@@ -41,14 +43,27 @@ function dropped(e) {
 }
 
 function resetPuzzle() {
-    // Move all labels back to the label box
+    // move all labels back to the label box
     labels.forEach(label => {
         labelBox.appendChild(label);
     });
 
-    // Clear the dragged element reference
+    // clear the dragged element reference
     currentDraggedElement = null;
+
+    // removes highlight from all zones once it resets
+    targetZones.forEach(zone => { zone.classList.remove("highlight"); });
 }
+
+function dragEnter(e) {
+    e.preventDefault();
+    this.classList.add("highlight");
+}
+
+function dragLeave(e) {
+    this.classList.remove("highlight");
+}
+
 
 
 // Event Listeners
@@ -59,6 +74,7 @@ labels.forEach(label => {
 targetZones.forEach(zone => {
     zone.addEventListener("dragover", dragOver);
     zone.addEventListener("drop", dropped);
+    zone.addEventListener("dragenter", dragEnter); 
 });
 
 resetBtn.addEventListener("click", resetPuzzle);

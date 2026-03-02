@@ -45,6 +45,11 @@ h1, p {
     height: 70px;
 }
 
+.target-zone.highlight {
+    outline: 3px solid #8f27ff;
+    background-color: rgba(80, 18, 204, 0.577);
+}
+
 #heart {
     top: 40%;
     left: 50%;
